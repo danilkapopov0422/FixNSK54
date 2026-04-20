@@ -1403,15 +1403,9 @@
       }
     }
   
-    .tab-radio {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .contact-wrap {
+    .contact-shell {
       position: relative;
-      z-index: 5;
+      z-index: 6;
     }
 
     .contact-tabs {
@@ -1421,10 +1415,7 @@
       flex-wrap: wrap;
     }
 
-    .tab-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .contact-tab-btn {
       min-height: 48px;
       padding: 0 18px;
       border-radius: 14px;
@@ -1434,57 +1425,66 @@
       font-weight: 700;
       cursor: pointer;
       transition: 0.25s ease;
+      box-shadow: none;
+      appearance: none;
+      -webkit-appearance: none;
       user-select: none;
-      pointer-events: auto;
-      position: relative;
-      z-index: 3;
     }
 
-    #tabRepair:checked ~ .contact-tabs label[for="tabRepair"],
-    #tabUtil:checked ~ .contact-tabs label[for="tabUtil"] {
+    .contact-tab-btn.is-active {
       background: #ffffff;
       color: var(--primary);
       border-color: #ffffff;
       box-shadow: var(--shadow-soft);
     }
 
-    .contact-panels {
-      position: relative;
-      z-index: 2;
-    }
-
     .contact-panel {
       display: none;
     }
 
-    #tabRepair:checked ~ .contact-panels .contact-panel--repair {
+    .contact-panel.is-active {
       display: block;
     }
 
-    #tabUtil:checked ~ .contact-panels .contact-panel--util {
-      display: block;
+    .file-input-native {
+      display: none;
+    }
+
+    .file-upload-trigger {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      color: #ffffff;
+      position: relative;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,0.38);
+      background: rgba(255,255,255,0.10);
+      padding: 18px;
+      margin-bottom: 12px;
+      overflow: hidden;
     }
 
     .toast-global {
       position: fixed;
       left: 50%;
       bottom: 92px;
-      transform: translateX(-50%) translateY(20px);
-      min-width: min(92vw, 360px);
+      transform: translateX(-50%) translateY(18px);
+      min-width: min(92vw, 320px);
       max-width: min(92vw, 420px);
       padding: 14px 18px;
       border-radius: 16px;
-      background: #0f172a;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.26);
       color: #ffffff;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
       font-size: 14px;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.45;
+      text-align: center;
       opacity: 0;
       pointer-events: none;
       transition: 0.25s ease;
-      z-index: 300;
-      text-align: center;
+      z-index: 400;
+      background: #14532d;
     }
 
     .toast-global.show {
@@ -1492,12 +1492,8 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    .toast-global.toast-error {
+    .toast-global.is-error {
       background: #7f1d1d;
-    }
-
-    .toast-global.toast-success {
-      background: #14532d;
     }
 
   </style>
@@ -2000,67 +1996,60 @@
             </p>
           </div>
 
-          <div class="contact-wrap">
-            <input class="tab-radio" type="radio" name="contactTab" id="tabRepair" checked />
-            <input class="tab-radio" type="radio" name="contactTab" id="tabUtil" />
-
+          <div class="contact-shell">
             <div class="contact-tabs">
-              <label class="tab-chip" for="tabRepair">Ремонт техники</label>
-              <label class="tab-chip" for="tabUtil">Утилизация</label>
+              <button class="contact-tab-btn is-active" type="button" data-contact-tab="repair">Ремонт техники</button>
+              <button class="contact-tab-btn" type="button" data-contact-tab="util">Утилизация</button>
             </div>
 
-            <div class="contact-panels">
-              <div class="contact-panel contact-panel--repair">
-                <form class="form" id="repairForm">
-                  <input type="text" placeholder="Ваше имя" />
-                  <input type="tel" placeholder="Телефон" />
-                  <input type="text" placeholder="Ваш адрес" />
-                  <input type="text" placeholder="Удобное время для приезда" />
-                  <select>
-                    <option>Выберите технику</option>
-                    <option>Стиральные машины</option>
-                    <option>Посудомоечные машины</option>
-                    <option>Холодильники</option>
-                    <option>Духовые шкафы</option>
-                    <option>Варочные панели</option>
-                    <option>Сушильные машины</option>
-                  </select>
-                  <textarea placeholder="Опишите неисправность"></textarea>
-                  <button class="btn" type="submit">Отправить заявку</button>
-                  <div class="form-status" id="repairStatus"></div>
-                </form>
-              </div>
+            <div class="contact-panel is-active" data-contact-panel="repair">
+              <form class="form" id="repairForm">
+                <input type="text" placeholder="Ваше имя" />
+                <input type="tel" placeholder="Телефон" />
+                <input type="text" placeholder="Ваш адрес" />
+                <input type="text" placeholder="Удобное время для приезда" />
+                <select>
+                  <option>Выберите технику</option>
+                  <option>Стиральные машины</option>
+                  <option>Посудомоечные машины</option>
+                  <option>Холодильники</option>
+                  <option>Духовые шкафы</option>
+                  <option>Варочные панели</option>
+                  <option>Сушильные машины</option>
+                </select>
+                <textarea placeholder="Опишите неисправность"></textarea>
+                <button class="btn" type="submit">Отправить заявку</button>
+                <div class="form-status" id="repairStatus"></div>
+              </form>
+            </div>
 
-              <div class="contact-panel contact-panel--util">
-                <form class="form" id="utilForm">
-                  <input type="text" placeholder="Ваше имя" />
-                  <input type="tel" placeholder="Телефон" />
-                  <select>
-                    <option>Какая техника на утилизацию</option>
-                    <option>Стиральная машина</option>
-                    <option>Посудомоечная машина</option>
-                    <option>Холодильник</option>
-                    <option>Духовой шкаф</option>
-                    <option>Другая техника</option>
-                  </select>
+            <div class="contact-panel" data-contact-panel="util">
+              <form class="form" id="utilForm">
+                <input type="text" placeholder="Ваше имя" />
+                <input type="tel" placeholder="Телефон" />
+                <select>
+                  <option>Какая техника на утилизацию</option>
+                  <option>Стиральная машина</option>
+                  <option>Посудомоечная машина</option>
+                  <option>Холодильник</option>
+                  <option>Духовой шкаф</option>
+                  <option>Другая техника</option>
+                </select>
 
-                  <div class="upload-box">
-                    <label class="upload-label" for="photoUpload">
-                      <div class="upload-icon">📷</div>
-                      <div class="upload-text">
-                        <strong>Добавьте фото техники</strong>
-                        <span>Можно приложить 1–3 фото для быстрой предварительной оценки</span>
-                      </div>
-                    </label>
-                    <input class="file-input-hidden" id="photoUpload" type="file" accept="image/*" />
-                    <div class="file-name" id="fileName">Файл пока не выбран</div>
+                <input class="file-input-native" id="photoUpload" type="file" accept="image/*" />
+                <label class="file-upload-trigger" for="photoUpload">
+                  <div class="upload-icon">📷</div>
+                  <div class="upload-text">
+                    <strong>Добавьте фото техники</strong>
+                    <span>Можно приложить 1–3 фото для быстрой предварительной оценки</span>
                   </div>
+                </label>
+                <div class="file-name" id="fileName">Файл пока не выбран</div>
 
-                  <textarea placeholder="Опишите состояние техники, адрес и удобное время"></textarea>
-                  <button class="btn" type="submit">Отправить запрос</button>
-                  <div class="form-status" id="utilStatus"></div>
-                </form>
-              </div>
+                <textarea placeholder="Опишите состояние техники, адрес и удобное время"></textarea>
+                <button class="btn" type="submit">Отправить запрос</button>
+                <div class="form-status" id="utilStatus"></div>
+              </form>
             </div>
           </div>
         </div>
@@ -2096,7 +2085,9 @@
 
         img.style.display = 'none';
         const card = img.closest('.brand-logo');
-        if (card) card.classList.add('show-fallback');
+        if (card) {
+          card.classList.add('show-fallback');
+        }
       }
 
       document.addEventListener('DOMContentLoaded', () => {
@@ -2106,21 +2097,21 @@
       });
 
       const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
-      const toast = document.getElementById('globalToast');
+      const globalToast = document.getElementById('globalToast');
 
       function showToast(message, isError) {
-        if (!toast) return;
-        toast.textContent = message;
-        toast.classList.remove('toast-error', 'toast-success', 'show');
-        toast.classList.add(isError ? 'toast-error' : 'toast-success');
-        requestAnimationFrame(() => toast.classList.add('show'));
+        if (!globalToast) return;
+        globalToast.textContent = message;
+        globalToast.classList.remove('show', 'is-error');
+        if (isError) globalToast.classList.add('is-error');
+        requestAnimationFrame(() => globalToast.classList.add('show'));
         clearTimeout(window.__toastTimer);
         window.__toastTimer = setTimeout(() => {
-          toast.classList.remove('show');
+          globalToast.classList.remove('show');
         }, 3200);
       }
 
-      function setStatus(id, message, isError) {
+      function setStatus(id, message, isError = false) {
         const box = document.getElementById(id);
         if (!box) return;
         box.textContent = message;
@@ -2141,26 +2132,38 @@
         const input = document.getElementById(inputId);
         const output = document.getElementById(outputId);
         if (!input || !output) return;
+
         input.addEventListener('change', () => {
-          output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
+          output.textContent = input.files && input.files.length
+            ? input.files[0].name
+            : 'Файл пока не выбран';
         });
       }
 
       bindFilePreview('photoUpload', 'fileName');
 
-      function setActiveTab(tab) {
-        const repair = document.getElementById('tabRepair');
-        const util = document.getElementById('tabUtil');
-        if (tab === 'util' && util) util.checked = true;
-        if (tab === 'repair' && repair) repair.checked = true;
+      function setContactTab(tabName) {
+        document.querySelectorAll('.contact-tab-btn').forEach((btn) => {
+          btn.classList.toggle('is-active', btn.dataset.contactTab === tabName);
+        });
+
+        document.querySelectorAll('.contact-panel').forEach((panel) => {
+          panel.classList.toggle('is-active', panel.dataset.contactPanel === tabName);
+        });
       }
+
+      document.querySelectorAll('.contact-tab-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          setContactTab(btn.dataset.contactTab);
+        });
+      });
 
       function collectFormText(title, form) {
         const values = Array.from(form.querySelectorAll('input, select, textarea'))
           .filter((el) => el.type !== 'file')
           .map((el) => {
-            const label = el.placeholder || el.options?.[el.selectedIndex]?.text || el.name || 'Поле';
-            const value = el.value?.trim();
+            const label = el.placeholder || (el.options && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') || el.name || 'Поле';
+            const value = (el.value || '').trim();
             if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) return null;
             return label + ': ' + value;
           })
@@ -2170,12 +2173,7 @@
 ');
       }
 
-      async function sendToWorker(options) {
-        const title = options.title;
-        const formId = options.formId;
-        const statusId = options.statusId;
-        const fileInputId = options.fileInputId || null;
-
+      async function sendToWorker({ title, formId, statusId, fileInputId = null }) {
         const form = document.getElementById(formId);
         if (!form) return;
         clearStatus(statusId);
@@ -2201,10 +2199,7 @@
             response = await fetch(WORKER_URL, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                title: title,
-                message: message
-              })
+              body: JSON.stringify({ title, message })
             });
           }
 
@@ -2221,8 +2216,9 @@
 
           setStatus(statusId, 'Заявка отправлена.', false);
           form.reset();
-          const utilName = document.getElementById('fileName');
-          if (utilName) utilName.textContent = 'Файл пока не выбран';
+
+          const fileNameBox = document.getElementById('fileName');
+          if (fileNameBox) fileNameBox.textContent = 'Файл пока не выбран';
         } catch (error) {
           console.error('Form send error:', error);
           setStatus(statusId, 'Не удалось отправить заявку.', true);
@@ -2230,7 +2226,7 @@
       }
 
       function prefillRepairForm(equipment, issueText) {
-        setActiveTab('repair');
+        setContactTab('repair');
         const select = document.querySelector('#repairForm select');
         const textarea = document.querySelector('#repairForm textarea');
         const formBlock = document.getElementById('contacts');
@@ -2244,14 +2240,16 @@
           textarea.value = issueText;
         }
 
-        if (formBlock) formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (formBlock) {
+          formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
 
       document.querySelectorAll('.service-item').forEach((item) => {
         item.addEventListener('click', () => {
           const card = item.closest('.card');
-          const equipment = card?.dataset.equipment || '';
-          const issue = item.querySelector('span')?.textContent?.trim() || '';
+          const equipment = card && card.dataset ? card.dataset.equipment || '' : '';
+          const issue = item.querySelector('span') ? item.querySelector('span').textContent.trim() : '';
           prefillRepairForm(equipment, issue);
         });
       });
@@ -2265,14 +2263,14 @@
 
       document.querySelectorAll('[data-open-tab="repair"]').forEach((link) => {
         link.addEventListener('click', () => {
-          setActiveTab('repair');
+          setContactTab('repair');
         });
       });
 
       const floatingButton = document.querySelector('.floating-cta');
       if (floatingButton) {
         floatingButton.addEventListener('click', () => {
-          setActiveTab('repair');
+          setContactTab('repair');
         });
       }
 
