@@ -1076,32 +1076,6 @@
       resize: vertical;
     }
 
-
-    .cta-box > div:last-child {
-      position: relative;
-      z-index: 20;
-    }
-
-    .form-tabs {
-      position: relative;
-      z-index: 30;
-    }
-
-    .tab-btn {
-      position: relative;
-      z-index: 31;
-      pointer-events: auto;
-      -webkit-appearance: none;
-      appearance: none;
-      user-select: none;
-    }
-
-    #panel-repair,
-    #panel-util {
-      position: relative;
-      z-index: 25;
-    }
-
     .form-tabs {
       display: flex;
       gap: 12px;
@@ -1457,7 +1431,7 @@
       <div class="container hero-grid">
         <div>
           <div class="hero-badge">✔ Скидка 10% на первое обращение</div>
-          <h1>Ремонт стиральных и посудомоечных машин быстро, аккуратно и с гарантией</h1>
+          <h1>Ремонт бытовой техники быстро, аккуратно и с гарантией</h1>
           <p>
             Профессиональный ремонт бытовой техники с выездом мастера за час, работой по всему городу
             и гарантией на выполненные работы до 365 дней. Действует скидка 10% на первое обращение.
@@ -1594,12 +1568,9 @@
             <div class="card-icon">🧺</div>
             <h3>Стиральные машины</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Стиральная машина не греет воду</span><strong>от 300 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Стиральная машина не сливает воду</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Стиральная машина не крутит барабан</span><strong>от 600 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Стиральная машина не греет воду</span><strong>от 300 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Стиральная машина не сливает воду</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Стиральная машина не крутит барабан</span><strong>от 600 ₽</strong></li>
             </ul>
           </article>
 
@@ -1607,12 +1578,9 @@
             <div class="card-icon">🍽</div>
             <h3>Посудомоечные машины</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Посудомоечная машина не набирает воду</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Посудомоечная машина плохо сушит посуду</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Посудомоечная машина шумит или протекает</span><strong>от 700 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Посудомоечная машина не набирает воду</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Посудомоечная машина плохо сушит посуду</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Посудомоечная машина шумит или протекает</span><strong>от 700 ₽</strong></li>
             </ul>
           </article>
 
@@ -1620,12 +1588,9 @@
             <div class="card-icon">🌬</div>
             <h3>Сушильные машины</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Сушильная машина не греет воздух</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Сушильная машина не запускает цикл</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Сушильная машина долго сушит вещи</span><strong>от 600 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Сушильная машина не греет воздух</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Сушильная машина не запускает цикл</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Сушильная машина долго сушит вещи</span><strong>от 600 ₽</strong></li>
             </ul>
           </article>
 
@@ -1633,12 +1598,9 @@
             <div class="card-icon">❄</div>
             <h3>Холодильники</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Холодильник плохо держит холод</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>В холодильнике намерзает лёд</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Холодильник шумит при работе</span><strong>от 300 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Холодильник плохо держит холод</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>В холодильнике намерзает лёд</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Холодильник шумит при работе</span><strong>от 300 ₽</strong></li>
             </ul>
           </article>
 
@@ -1646,12 +1608,9 @@
             <div class="card-icon">🔥</div>
             <h3>Духовые шкафы</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Духовой шкаф не нагревается</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Духовой шкаф не включается</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Духовой шкаф не держит температуру</span><strong>от 700 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Духовой шкаф не нагревается</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Духовой шкаф не включается</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Духовой шкаф не держит температуру</span><strong>от 700 ₽</strong></li>
             </ul>
           </article>
 
@@ -1659,12 +1618,9 @@
             <div class="card-icon">⚡</div>
             <h3>Варочные панели</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Варочная панель: не работает конфорка</span><strong>от 300 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Варочная панель не включается</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"
-              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Варочная панель показывает ошибку</span><strong>от 700 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Варочная панель: не работает конфорка</span><strong>от 300 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Варочная панель не включается</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"><span>Варочная панель показывает ошибку</span><strong>от 700 ₽</strong></li>
             </ul>
           </article>
         </div>
@@ -1718,7 +1674,7 @@
       <div class="container">
         <h2 class="section-title">Как мы работаем</h2>
         <p class="section-subtitle">
-    
+          Структура этого блока тоже перекликается с fixnsk54.ru: заявка, диагностика, ремонт и готовый результат.
         </p>
 
         <div class="steps-grid">
@@ -1775,6 +1731,10 @@
             <strong>Рядом с метро Октябрьская</strong>
           </article>
         </div>
+
+        <div class="reviews-actions">
+          <a href="#contacts" class="btn btn-outline" data-open-tab="review">Оставить отзыв</a>
+        </div>
       </div>
     </section>
 
@@ -1805,8 +1765,7 @@
                   <h3>Indesit</h3>
                   <div class="sale-model">IWSD 6105 (CIS).L</div>
                 </div>
-                <div class="sale-price" data-sale-title="Indesit IWSD 6105 (CIS)" data-open-tab="repair"
-                onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" >10 000 ₽</div>
+                <div class="sale-price" data-sale-title="Indesit IWSD 6105 (CIS)" data-open-tab="repair">10 000 ₽</div>
               </div>
               <p>
                 Практичная стиральная машина для повседневного использования. Подойдёт для квартиры, студии,
@@ -1841,8 +1800,7 @@
                   <h3>Siemens</h3>
                   <div class="sale-model">Advantiq X10.35</div>
                 </div>
-                <div class="sale-price" data-sale-title="Siemens Advantiq X10.35" data-open-tab="repair"
-                onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" >17 000 ₽</div>
+                <div class="sale-price" data-sale-title="Siemens Advantiq X10.35" data-open-tab="repair">17 000 ₽</div>
               </div>
               <p>
                 Более интересный вариант для тех, кто хочет технику классом выше. Хорошо смотрится в современном интерьере,
@@ -1945,11 +1903,10 @@
 
           <div>
             <div class="form-tabs">
-              <button class="tab-btn active" type="button" data-tab="repair"
-                onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');return false;">Ремонт техники</button>
-              <button class="tab-btn" type="button" data-tab="util"
-                onclick="document.getElementById('panel-util').classList.add('active');document.getElementById('panel-repair').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.remove('active');return false;">Утилизация</button>
-                          </div>
+              <button class="tab-btn active" type="button" data-tab="repair">Ремонт техники</button>
+              <button class="tab-btn" type="button" data-tab="util">Утилизация</button>
+              <button class="tab-btn" type="button" data-tab="review">Оставить отзыв</button>
+            </div>
 
             <div class="form-panel active" id="panel-repair">
               <form class="form" id="repairForm">
@@ -2001,7 +1958,7 @@
               </form>
             </div>
 
-            <div class="form-panel" id="panel-review" style="display:none !important;">
+            <div class="form-panel" id="panel-review">
               <form class="form" id="reviewForm">
                 <input type="text" placeholder="Ваше имя" />
                 <input type="tel" placeholder="Телефон для обратной связи" />
@@ -2086,7 +2043,7 @@
 
       function openFormTab(tab) {
         tabButtons.forEach((btn) => btn.classList.remove('active'));
-        Object.values(panels).forEach((panel) => { if (panel) panel.classList.remove('active'); });
+        Object.values(panels).forEach((panel) => panel.classList.remove('active'));
         const targetBtn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
         if (targetBtn) targetBtn.classList.add('active');
         if (panels[tab]) panels[tab].classList.add('active');
@@ -2111,8 +2068,7 @@
       bindFilePreview('reviewPhotoUpload', 'reviewFileName');
 
 
-      const TELEGRAM_BOT_TOKEN = '8687781543:AAFDo08DX9uoaVW2gYSjFpvUANQ_5Nsd2mk';
-      const TELEGRAM_CHAT_ID = '718268704';
+      const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
 
       function setStatus(id, message, isError = false) {
         const box = document.getElementById(id);
@@ -2156,51 +2112,49 @@
         clearStatus(statusId);
 
         const message = collectFormText(title, form);
-        const tokenReady = TELEGRAM_BOT_TOKEN && !TELEGRAM_BOT_TOKEN.includes('PASTE_');
-        const chatReady = TELEGRAM_CHAT_ID && !TELEGRAM_CHAT_ID.includes('PASTE_');
         const fileInput = fileInputId ? document.getElementById(fileInputId) : null;
         const hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
 
-        if (!tokenReady || !chatReady) {
-          try {
-            navigator.clipboard.writeText(message).catch(() => {});
-          } catch (e) {}
-          setStatus(statusId, 'Форма подготовлена. Чтобы заявки реально приходили в Telegram, вставь TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID внизу файла. Текст заявки скопирован в буфер, сейчас откроется Telegram.');
-          window.open('https://t.me/fixnsk54', '_blank', 'noopener,noreferrer');
-          return;
-        }
-
         try {
+          let response;
+
           if (hasFile) {
             const payload = new FormData();
-            payload.append('chat_id', TELEGRAM_CHAT_ID);
-            payload.append('caption', message);
+            payload.append('title', title);
+            payload.append('message', message);
             payload.append('photo', fileInput.files[0]);
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+
+            response = await fetch(WORKER_URL, {
               method: 'POST',
               body: payload
             });
-            if (!response.ok) throw new Error('telegram_photo_failed');
           } else {
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            response = await fetch(WORKER_URL, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: message
+                title: title,
+                message: message
               })
             });
-            if (!response.ok) throw new Error('telegram_message_failed');
+          }
+
+          const result = await response.json();
+
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || 'worker_failed');
           }
 
           setStatus(statusId, 'Заявка отправлена в Telegram.');
           form.reset();
+
           const reviewName = document.getElementById('reviewFileName');
           const utilName = document.getElementById('fileName');
           if (reviewName) reviewName.textContent = 'Файл пока не выбран';
           if (utilName) utilName.textContent = 'Файл пока не выбран';
         } catch (error) {
-          setStatus(statusId, 'Не удалось отправить в Telegram. Проверь TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID.', true);
+          setStatus(statusId, 'Не удалось отправить заявку. Проверь Worker.', true);
+          console.error('Worker send error:', error);
         }
       }
 
@@ -2277,9 +2231,7 @@
   </main>
 
 
-  <a class="floating-cta" href="#contacts" data-open-tab="repair"
-    onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');"
-    aria-label="Оформить заявку">
+  <a class="floating-cta" href="#contacts" data-open-tab="repair" aria-label="Оформить заявку">
     <span class="floating-cta-icon">✦</span>
     <span>Оформить заявку</span>
   </a>
