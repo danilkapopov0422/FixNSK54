@@ -1076,6 +1076,65 @@
       resize: vertical;
     }
 
+
+    .cta-box > div:last-child {
+      position: relative;
+      z-index: 10;
+    }
+
+    .form-tabs {
+      position: relative;
+      z-index: 12;
+    }
+
+    .tab-btn {
+      position: relative;
+      z-index: 13;
+      pointer-events: auto;
+      -webkit-appearance: none;
+      appearance: none;
+      user-select: none;
+    }
+
+    .form-panel {
+      display: none;
+    }
+
+    .form-panel.active {
+      display: block;
+    }
+
+    .site-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      min-width: 240px;
+      max-width: calc(100% - 32px);
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.94);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.25s ease;
+      z-index: 200;
+      text-align: center;
+    }
+
+    .site-toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .site-toast.error {
+      background: rgba(127, 29, 29, 0.96);
+    }
+
     .form-tabs {
       display: flex;
       gap: 12px;
@@ -1731,10 +1790,6 @@
             <strong>Рядом с метро Октябрьская</strong>
           </article>
         </div>
-
-        <div class="reviews-actions">
-          <a href="#contacts" class="btn btn-outline" data-open-tab="review">Оставить отзыв</a>
-        </div>
       </div>
     </section>
 
@@ -1903,9 +1958,8 @@
 
           <div>
             <div class="form-tabs">
-              <button class="tab-btn active" type="button" data-tab="repair">Ремонт техники</button>
-              <button class="tab-btn" type="button" data-tab="util">Утилизация</button>
-              <button class="tab-btn" type="button" data-tab="review">Оставить отзыв</button>
+              <button id="tab-repair" class="tab-btn active" type="button" data-tab="repair" onclick="switchContactTab('repair'); return false;">Ремонт техники</button>
+              <button id="tab-util" class="tab-btn" type="button" data-tab="util" onclick="switchContactTab('util'); return false;">Утилизация</button>
             </div>
 
             <div class="form-panel active" id="panel-repair">
@@ -1920,6 +1974,8 @@
                   <option>Посудомоечные машины</option>
                   <option>Холодильники</option>
                   <option>Духовые шкафы</option>
+                  <option>Варочные панели</option>
+                  <option>Сушильные машины</option>
                 </select>
                 <textarea placeholder="Опишите неисправность"></textarea>
                 <button class="btn" type="submit">Отправить заявку</button>
@@ -1957,44 +2013,12 @@
                 <div class="form-status" id="utilStatus"></div>
               </form>
             </div>
-
-            <div class="form-panel" id="panel-review">
-              <form class="form" id="reviewForm">
-                <input type="text" placeholder="Ваше имя" />
-                <input type="tel" placeholder="Телефон для обратной связи" />
-                <input type="text" placeholder="Район или улица" />
-                <select>
-                  <option>О какой технике отзыв</option>
-                  <option>Стиральные машины</option>
-                  <option>Посудомоечные машины</option>
-                  <option>Холодильники</option>
-                  <option>Духовые шкафы</option>
-                  <option>Варочные панели</option>
-                  <option>Другая техника</option>
-                </select>
-
-                <div class="upload-box">
-                  <label class="upload-label" for="reviewPhotoUpload">
-                    <div class="upload-icon">🖼</div>
-                    <div class="upload-text">
-                      <strong>Добавьте фото, если хотите</strong>
-                      <span>Можно приложить фото техники, результата ремонта или места установки</span>
-                    </div>
-                  </label>
-                  <input class="file-input-hidden" id="reviewPhotoUpload" type="file" accept="image/*" />
-                  <div class="file-name" id="reviewFileName">Файл пока не выбран</div>
-                </div>
-
-                <textarea placeholder="Напишите ваш отзыв"></textarea>
-                <button class="btn" type="submit">Отправить отзыв</button>
-                <div class="form-status" id="reviewStatus"></div>
-              </form>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
+    
     <script>
       function tryBrandFile(img) {
         const brand = img.dataset.brand || img.alt || '';
@@ -2027,50 +2051,9 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.brand-logo img').forEach((img) => {
-          img.dataset.tryIndex = '0';
-        });
-      });
-
-      
-      const tabButtons = document.querySelectorAll('.tab-btn');
-      const panels = {
-        repair: document.getElementById('panel-repair'),
-        util: document.getElementById('panel-util'),
-        review: document.getElementById('panel-review')
-      };
-
-      function openFormTab(tab) {
-        tabButtons.forEach((btn) => btn.classList.remove('active'));
-        Object.values(panels).forEach((panel) => panel.classList.remove('active'));
-        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
-        if (targetBtn) targetBtn.classList.add('active');
-        if (panels[tab]) panels[tab].classList.add('active');
-      }
-
-      tabButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          openFormTab(button.dataset.tab);
-        });
-      });
-
-      function bindFilePreview(inputId, outputId) {
-        const input = document.getElementById(inputId);
-        const output = document.getElementById(outputId);
-        if (!input || !output) return;
-        input.addEventListener('change', () => {
-          output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
-        });
-      }
-
-      bindFilePreview('photoUpload', 'fileName');
-      bindFilePreview('reviewPhotoUpload', 'reviewFileName');
-
-
       const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
 
-      function setStatus(id, message, isError = false) {
+      function setStatus(id, message, isError) {
         const box = document.getElementById(id);
         if (!box) return;
         box.textContent = message;
@@ -2086,33 +2069,65 @@
         box.classList.remove('show');
       }
 
-      function escapeHtml(value) {
-        return String(value ?? '')
-          .replaceAll('&', '&amp;')
-          .replaceAll('<', '&lt;')
-          .replaceAll('>', '&gt;');
+      function showToast(message, isError) {
+        const toast = document.getElementById('siteToast');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.className = 'site-toast show' + (isError ? ' error' : '');
+        window.clearTimeout(showToast._timer);
+        showToast._timer = window.setTimeout(function () {
+          toast.className = 'site-toast';
+        }, 3200);
       }
+
+      function bindFilePreview(inputId, outputId) {
+        const input = document.getElementById(inputId);
+        const output = document.getElementById(outputId);
+        if (!input || !output) return;
+        input.addEventListener('change', function () {
+          output.textContent = input.files && input.files.length ? input.files[0].name : 'Файл пока не выбран';
+        });
+      }
+
+      function switchContactTab(tab) {
+        const repairBtn = document.getElementById('tab-repair');
+        const utilBtn = document.getElementById('tab-util');
+        const repairPanel = document.getElementById('panel-repair');
+        const utilPanel = document.getElementById('panel-util');
+
+        if (!repairBtn || !utilBtn || !repairPanel || !utilPanel) return;
+
+        const isRepair = tab === 'repair';
+        repairBtn.classList.toggle('active', isRepair);
+        utilBtn.classList.toggle('active', !isRepair);
+        repairPanel.classList.toggle('active', isRepair);
+        utilPanel.classList.toggle('active', !isRepair);
+      }
+
+      window.switchContactTab = switchContactTab;
 
       function collectFormText(title, form) {
         const values = Array.from(form.querySelectorAll('input, select, textarea'))
-          .filter((el) => el.type !== 'file')
-          .map((el) => {
-            const label = el.placeholder || el.options?.[el.selectedIndex]?.text || el.name || 'Поле';
-            const value = el.value?.trim();
-            if (!value || value.startsWith('Выберите') || value.startsWith('Какая') || value.startsWith('О какой')) return null;
-            return `${label}: ${value}`;
+          .filter(function (el) { return el.type !== 'file'; })
+          .map(function (el) {
+            const label = el.placeholder || (el.options && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') || el.name || 'Поле';
+            const value = (el.value || '').trim();
+            if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) return null;
+            return label + ': ' + value;
           })
           .filter(Boolean);
-        return `FIXNSK54 — ${title}\n\n${values.join('\n')}`;
+
+        return values.join('
+');
       }
 
-      async function sendToTelegram({ title, formId, statusId, fileInputId = null }) {
-        const form = document.getElementById(formId);
+      async function sendToWorker(options) {
+        const form = document.getElementById(options.formId);
         if (!form) return;
-        clearStatus(statusId);
 
-        const message = collectFormText(title, form);
-        const fileInput = fileInputId ? document.getElementById(fileInputId) : null;
+        clearStatus(options.statusId);
+        const message = collectFormText(options.title, form);
+        const fileInput = options.fileInputId ? document.getElementById(options.fileInputId) : null;
         const hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
 
         try {
@@ -2120,7 +2135,7 @@
 
           if (hasFile) {
             const payload = new FormData();
-            payload.append('title', title);
+            payload.append('title', options.title);
             payload.append('message', message);
             payload.append('photo', fileInput.files[0]);
 
@@ -2133,101 +2148,117 @@
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                title: title,
+                title: options.title,
                 message: message
               })
             });
           }
 
-          const result = await response.json();
-
-          if (!response.ok || !result.ok) {
-            throw new Error(result.error || 'worker_failed');
+          let result = {};
+          try {
+            result = await response.json();
+          } catch (jsonError) {
+            result = { ok: false, error: 'invalid_json' };
           }
 
-          setStatus(statusId, 'Заявка отправлена в Telegram.');
-          form.reset();
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || ('HTTP ' + response.status));
+          }
 
-          const reviewName = document.getElementById('reviewFileName');
-          const utilName = document.getElementById('fileName');
-          if (reviewName) reviewName.textContent = 'Файл пока не выбран';
-          if (utilName) utilName.textContent = 'Файл пока не выбран';
+          form.reset();
+          const fileName = document.getElementById('fileName');
+          if (fileName) fileName.textContent = 'Файл пока не выбран';
+
+          setStatus(options.statusId, 'Заявка отправлена. Скоро свяжемся с вами.', false);
+          showToast('Заявка отправлена', false);
         } catch (error) {
-          setStatus(statusId, 'Не удалось отправить заявку. Проверь Worker.', true);
-          console.error('Worker send error:', error);
+          console.error('send form error', error);
+          setStatus(options.statusId, 'Не удалось отправить заявку. Проверьте Worker и повторите ещё раз.', true);
+          showToast('Не удалось отправить заявку', true);
         }
       }
 
       function prefillRepairForm(equipment, issueText) {
-        openFormTab('repair');
+        switchContactTab('repair');
+
         const select = document.querySelector('#repairForm select');
         const textarea = document.querySelector('#repairForm textarea');
         const formBlock = document.getElementById('contacts');
+
         if (select && equipment) {
-          const option = Array.from(select.options).find((opt) => opt.text.trim() === equipment.trim());
+          const option = Array.from(select.options).find(function (opt) {
+            return opt.text.trim() === equipment.trim();
+          });
           if (option) select.value = option.value;
         }
+
         if (textarea && issueText) {
           textarea.value = issueText;
         }
-        if (formBlock) formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (formBlock) {
+          formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
 
-
-      document.querySelectorAll('[data-open-tab="review"]').forEach((link) => {
-        link.addEventListener('click', () => {
-          openFormTab('review');
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.brand-logo img').forEach(function (img) {
+          img.dataset.tryIndex = '0';
         });
+
+        bindFilePreview('photoUpload', 'fileName');
+        switchContactTab('repair');
+
+        document.querySelectorAll('[data-open-tab="repair"]').forEach(function (link) {
+          link.addEventListener('click', function () {
+            switchContactTab('repair');
+          });
+        });
+
+        document.querySelectorAll('.service-item').forEach(function (item) {
+          item.addEventListener('click', function () {
+            const card = item.closest('.card');
+            const equipment = card && card.dataset ? (card.dataset.equipment || '') : '';
+            const issue = item.querySelector('span') ? item.querySelector('span').textContent.trim() : '';
+            prefillRepairForm(equipment, issue);
+          });
+        });
+
+        document.querySelectorAll('.sale-price').forEach(function (price) {
+          price.addEventListener('click', function () {
+            const saleTitle = price.dataset.saleTitle || 'Интересует техника';
+            prefillRepairForm('Стиральные машины', 'Интересует покупка: ' + saleTitle);
+          });
+        });
+
+        const repairForm = document.getElementById('repairForm');
+        const utilForm = document.getElementById('utilForm');
+
+        if (repairForm) {
+          repairForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            await sendToWorker({
+              title: 'Заявка на ремонт',
+              formId: 'repairForm',
+              statusId: 'repairStatus'
+            });
+          });
+        }
+
+        if (utilForm) {
+          utilForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            await sendToWorker({
+              title: 'Заявка на утилизацию',
+              formId: 'utilForm',
+              statusId: 'utilStatus',
+              fileInputId: 'photoUpload'
+            });
+          });
+        }
       });
-
-      document.querySelectorAll('[data-open-tab="repair"]').forEach((link) => {
-        link.addEventListener('click', () => {
-          openFormTab('repair');
-        });
-      });
-
-      document.querySelectorAll('.service-item').forEach((item) => {
-        item.addEventListener('click', () => {
-          const card = item.closest('.card');
-          const equipment = card?.dataset.equipment || '';
-          const issue = item.querySelector('span')?.textContent?.trim() || '';
-          prefillRepairForm(equipment, issue);
-        });
-      });
-
-      document.querySelectorAll('.sale-price').forEach((price) => {
-        price.addEventListener('click', () => {
-          const saleTitle = price.dataset.saleTitle || 'Интересует техника';
-          prefillRepairForm('Стиральные машины', `Интересует покупка: ${saleTitle}`);
-        });
-      });
-
-      const repairForm = document.getElementById('repairForm');
-      const utilForm = document.getElementById('utilForm');
-      const reviewForm = document.getElementById('reviewForm');
-
-      if (repairForm) {
-        repairForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToTelegram({ title: 'Заявка на ремонт', formId: 'repairForm', statusId: 'repairStatus' });
-        });
-      }
-
-      if (utilForm) {
-        utilForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToTelegram({ title: 'Заявка на утилизацию', formId: 'utilForm', statusId: 'utilStatus', fileInputId: 'photoUpload' });
-        });
-      }
-
-      if (reviewForm) {
-        reviewForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToTelegram({ title: 'Новый отзыв', formId: 'reviewForm', statusId: 'reviewStatus', fileInputId: 'reviewPhotoUpload' });
-        });
-      });
-
     </script>
+
   </main>
 
 
@@ -2235,6 +2266,9 @@
     <span class="floating-cta-icon">✦</span>
     <span>Оформить заявку</span>
   </a>
+
+
+  <div class="site-toast" id="siteToast"></div>
 
   <footer class="footer">
     <div class="container footer-row">
