@@ -2011,7 +2011,7 @@
 
             <div class="contact-panels">
               <div class="contact-panel contact-panel--repair">
-            <form class="form" id="repairForm" action="javascript:void(0);">
+                <form class="form" id="repairForm">
                   <input type="text" placeholder="Ваше имя" />
                   <input type="tel" placeholder="Телефон" />
                   <input type="text" placeholder="Ваш адрес" />
@@ -2032,7 +2032,7 @@
               </div>
 
               <div class="contact-panel contact-panel--util">
-                <form class="form" id="utilForm" action="javascript:void(0);">
+                <form class="form" id="utilForm">
                   <input type="text" placeholder="Ваше имя" />
                   <input type="tel" placeholder="Телефон" />
                   <select>
@@ -2066,40 +2066,8 @@
         </div>
       </div>
     </section>
-    
-    const repairForm = document.getElementById('repairForm');
-const utilForm = document.getElementById('utilForm');
 
-if (repairForm) {
-  repairForm.onsubmit = async function (event) {
-    event.preventDefault();
-    event.stopPropagation();
 
-    await sendToWorker({
-      title: 'Заявка на ремонт',
-      formId: 'repairForm',
-      statusId: 'repairStatus'
-    });
-
-    return false;
-  };
-}
-
-if (utilForm) {
-  utilForm.onsubmit = async function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    await sendToWorker({
-      title: 'Заявка на утилизацию',
-      formId: 'utilForm',
-      statusId: 'utilStatus',
-      fileInputId: 'photoUpload'
-    });
-
-    return false;
-  };
-}
     
     <script>
       function tryBrandFile(img) {
@@ -2178,13 +2146,12 @@ function showToast(message, isError) {
         const input = document.getElementById(inputId);
         const output = document.getElementById(outputId);
         if (!input || !output) return;
-
         input.addEventListener('change', () => {
           output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
         });
       }
 
-    bindFilePreview('photoUpload', 'fileName');
+      bindFilePreview('photoUpload', 'fileName');
 
       function setActiveTab(tab) {
         const repair = document.getElementById('tabRepair');
@@ -2194,27 +2161,18 @@ function showToast(message, isError) {
       }
 
       function collectFormText(title, form) {
-  const values = Array.from(form.querySelectorAll('input, select, textarea'))
-    .filter((el) => el.type !== 'file')
-    .map((el) => {
-      const label =
-        el.placeholder ||
-        (el.options && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') ||
-        el.name ||
-        'Поле';
+        const values = Array.from(form.querySelectorAll('input, select, textarea'))
+          .filter((el) => el.type !== 'file')
+          .map((el) => {
+            const label = el.placeholder || el.options?.[el.selectedIndex]?.text || el.name || 'Поле';
+            const value = el.value?.trim();
+            if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) return null;
+            return label + ': ' + value;
+          })
+          .filter(Boolean);
 
-      const value = (el.value || '').trim();
-
-      if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) {
-        return null;
-      }
-
-      return label + ': ' + value;
-    })
-    .filter(Boolean);
-
-  return values.join('\n');
-}
+        
+    return values.join('\\n');
 
       async function sendToWorker(options) {
         const title = options.title;
@@ -2321,7 +2279,32 @@ function showToast(message, isError) {
           setActiveTab('repair');
         });
       }
-      
+
+      const repairForm = document.getElementById('repairForm');
+      const utilForm = document.getElementById('utilForm');
+
+      if (repairForm) {
+        repairForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          await sendToWorker({
+            title: 'Заявка на ремонт',
+            formId: 'repairForm',
+            statusId: 'repairStatus'
+          });
+        });
+      }
+
+      if (utilForm) {
+        utilForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          await sendToWorker({
+            title: 'Заявка на утилизацию',
+            formId: 'utilForm',
+            statusId: 'utilStatus',
+            fileInputId: 'photoUpload'
+          });
+        });
+      }
     </script>
 
   </main>
