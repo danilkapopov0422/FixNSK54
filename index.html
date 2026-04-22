@@ -2321,32 +2321,7 @@ function showToast(message, isError) {
           setActiveTab('repair');
         });
       }
-
-      const repairForm = document.getElementById('repairForm');
-      const utilForm = document.getElementById('utilForm');
-
-      if (repairForm) {
-        repairForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToWorker({
-            title: 'Заявка на ремонт',
-            formId: 'repairForm',
-            statusId: 'repairStatus'
-          });
-        });
-      }
-
-      if (utilForm) {
-        utilForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToWorker({
-            title: 'Заявка на утилизацию',
-            formId: 'utilForm',
-            statusId: 'utilStatus',
-            fileInputId: 'photoUpload'
-          });
-        });
-      }
+      
     </script>
 
   </main>
