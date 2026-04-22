@@ -1076,6 +1076,32 @@
       resize: vertical;
     }
 
+
+    .cta-box > div:last-child {
+      position: relative;
+      z-index: 20;
+    }
+
+    .form-tabs {
+      position: relative;
+      z-index: 30;
+    }
+
+    .tab-btn {
+      position: relative;
+      z-index: 31;
+      pointer-events: auto;
+      -webkit-appearance: none;
+      appearance: none;
+      user-select: none;
+    }
+
+    #panel-repair,
+    #panel-util {
+      position: relative;
+      z-index: 25;
+    }
+
     .form-tabs {
       display: flex;
       gap: 12px;
@@ -1402,104 +1428,6 @@
         padding: 22px;
       }
     }
-  
-    .tab-radio {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .contact-wrap {
-      position: relative;
-      z-index: 5;
-    }
-
-    .contact-tabs {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .tab-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.24);
-      background: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.92);
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.25s ease;
-      user-select: none;
-      pointer-events: auto;
-      position: relative;
-      z-index: 3;
-    }
-
-    #tabRepair:checked ~ .contact-tabs label[for="tabRepair"],
-    #tabUtil:checked ~ .contact-tabs label[for="tabUtil"] {
-      background: #ffffff;
-      color: var(--primary);
-      border-color: #ffffff;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .contact-panels {
-      position: relative;
-      z-index: 2;
-    }
-
-    .contact-panel {
-      display: none;
-    }
-
-    #tabRepair:checked ~ .contact-panels .contact-panel--repair {
-      display: block;
-    }
-
-    #tabUtil:checked ~ .contact-panels .contact-panel--util {
-      display: block;
-    }
-
-    .toast-global {
-      position: fixed;
-      left: 50%;
-      bottom: 92px;
-      transform: translateX(-50%) translateY(20px);
-      min-width: min(92vw, 360px);
-      max-width: min(92vw, 420px);
-      padding: 14px 18px;
-      border-radius: 16px;
-      background: #0f172a;
-      color: #ffffff;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.4;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s ease;
-      z-index: 300;
-      text-align: center;
-    }
-
-    .toast-global.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .toast-global.toast-error {
-      background: #7f1d1d;
-    }
-
-    .toast-global.toast-success {
-      background: #14532d;
-    }
-
   </style>
 </head>
 <body>
@@ -1529,7 +1457,7 @@
       <div class="container hero-grid">
         <div>
           <div class="hero-badge">✔ Скидка 10% на первое обращение</div>
-          <h1>Ремонт бытовой техники быстро, аккуратно и с гарантией</h1>
+          <h1>Ремонт стиральных и посудомоечных машин быстро, аккуратно и с гарантией</h1>
           <p>
             Профессиональный ремонт бытовой техники с выездом мастера за час, работой по всему городу
             и гарантией на выполненные работы до 365 дней. Действует скидка 10% на первое обращение.
@@ -1666,9 +1594,12 @@
             <div class="card-icon">🧺</div>
             <h3>Стиральные машины</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"><span>Стиральная машина не греет воду</span><strong>от 300 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Стиральная машина не сливает воду</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Стиральная машина не крутит барабан</span><strong>от 600 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Стиральная машина не греет воду</span><strong>от 300 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Стиральная машина не сливает воду</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Стиральная машина не крутит барабан</span><strong>от 600 ₽</strong></li>
             </ul>
           </article>
 
@@ -1676,9 +1607,12 @@
             <div class="card-icon">🍽</div>
             <h3>Посудомоечные машины</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"><span>Посудомоечная машина не набирает воду</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Посудомоечная машина плохо сушит посуду</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Посудомоечная машина шумит или протекает</span><strong>от 700 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Посудомоечная машина не набирает воду</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Посудомоечная машина плохо сушит посуду</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Посудомоечная машина шумит или протекает</span><strong>от 700 ₽</strong></li>
             </ul>
           </article>
 
@@ -1686,9 +1620,12 @@
             <div class="card-icon">🌬</div>
             <h3>Сушильные машины</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"><span>Сушильная машина не греет воздух</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Сушильная машина не запускает цикл</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Сушильная машина долго сушит вещи</span><strong>от 600 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Сушильная машина не греет воздух</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Сушильная машина не запускает цикл</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Сушильная машина долго сушит вещи</span><strong>от 600 ₽</strong></li>
             </ul>
           </article>
 
@@ -1696,9 +1633,12 @@
             <div class="card-icon">❄</div>
             <h3>Холодильники</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"><span>Холодильник плохо держит холод</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>В холодильнике намерзает лёд</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Холодильник шумит при работе</span><strong>от 300 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Холодильник плохо держит холод</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>В холодильнике намерзает лёд</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Холодильник шумит при работе</span><strong>от 300 ₽</strong></li>
             </ul>
           </article>
 
@@ -1706,9 +1646,12 @@
             <div class="card-icon">🔥</div>
             <h3>Духовые шкафы</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"><span>Духовой шкаф не нагревается</span><strong>от 400 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Духовой шкаф не включается</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Духовой шкаф не держит температуру</span><strong>от 700 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Духовой шкаф не нагревается</span><strong>от 400 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Духовой шкаф не включается</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Духовой шкаф не держит температуру</span><strong>от 700 ₽</strong></li>
             </ul>
           </article>
 
@@ -1716,9 +1659,12 @@
             <div class="card-icon">⚡</div>
             <h3>Варочные панели</h3>
             <ul class="service-list">
-              <li class="service-item" data-open-tab="repair"><span>Варочная панель: не работает конфорка</span><strong>от 300 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Варочная панель не включается</span><strong>от 500 ₽</strong></li>
-              <li class="service-item" data-open-tab="repair"><span>Варочная панель показывает ошибку</span><strong>от 700 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Варочная панель: не работает конфорка</span><strong>от 300 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Варочная панель не включается</span><strong>от 500 ₽</strong></li>
+              <li class="service-item" data-open-tab="repair"
+              onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" ><span>Варочная панель показывает ошибку</span><strong>от 700 ₽</strong></li>
             </ul>
           </article>
         </div>
@@ -1772,7 +1718,7 @@
       <div class="container">
         <h2 class="section-title">Как мы работаем</h2>
         <p class="section-subtitle">
-          Структура этого блока тоже перекликается с fixnsk54.ru: заявка, диагностика, ремонт и готовый результат.
+    
         </p>
 
         <div class="steps-grid">
@@ -1829,10 +1775,6 @@
             <strong>Рядом с метро Октябрьская</strong>
           </article>
         </div>
-
-        <div class="reviews-actions">
-          <a href="#contacts" class="btn btn-outline" data-open-tab="review">Оставить отзыв</a>
-        </div>
       </div>
     </section>
 
@@ -1863,7 +1805,8 @@
                   <h3>Indesit</h3>
                   <div class="sale-model">IWSD 6105 (CIS).L</div>
                 </div>
-                <div class="sale-price" data-sale-title="Indesit IWSD 6105 (CIS)" data-open-tab="repair">10 000 ₽</div>
+                <div class="sale-price" data-sale-title="Indesit IWSD 6105 (CIS)" data-open-tab="repair"
+                onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" >10 000 ₽</div>
               </div>
               <p>
                 Практичная стиральная машина для повседневного использования. Подойдёт для квартиры, студии,
@@ -1898,7 +1841,8 @@
                   <h3>Siemens</h3>
                   <div class="sale-model">Advantiq X10.35</div>
                 </div>
-                <div class="sale-price" data-sale-title="Siemens Advantiq X10.35" data-open-tab="repair">17 000 ₽</div>
+                <div class="sale-price" data-sale-title="Siemens Advantiq X10.35" data-open-tab="repair"
+                onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');" >17 000 ₽</div>
               </div>
               <p>
                 Более интересный вариант для тех, кто хочет технику классом выше. Хорошо смотрится в современном интерьере,
@@ -1988,7 +1932,6 @@
       </div>
     </section>
 
-    
     <section class="cta" id="contacts">
       <div class="container">
         <div class="cta-box">
@@ -2000,322 +1943,366 @@
             </p>
           </div>
 
-          <div class="contact-wrap">
-            <input class="tab-radio" type="radio" name="contactTab" id="tabRepair" checked />
-            <input class="tab-radio" type="radio" name="contactTab" id="tabUtil" />
+          <div>
+            <div class="form-tabs">
+              <button class="tab-btn active" type="button" data-tab="repair"
+                onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');return false;">Ремонт техники</button>
+              <button class="tab-btn" type="button" data-tab="util"
+                onclick="document.getElementById('panel-util').classList.add('active');document.getElementById('panel-repair').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.remove('active');return false;">Утилизация</button>
+                          </div>
 
-            <div class="contact-tabs">
-              <label class="tab-chip" for="tabRepair">Ремонт техники</label>
-              <label class="tab-chip" for="tabUtil">Утилизация</label>
+            <div class="form-panel active" id="panel-repair">
+              <form class="form" id="repairForm">
+                <input type="text" placeholder="Ваше имя" />
+                <input type="tel" placeholder="Телефон" />
+                <input type="text" placeholder="Ваш адрес" />
+                <input type="text" placeholder="Удобное время для приезда" />
+                <select>
+                  <option>Выберите технику</option>
+                  <option>Стиральные машины</option>
+                  <option>Посудомоечные машины</option>
+                  <option>Холодильники</option>
+                  <option>Духовые шкафы</option>
+                </select>
+                <textarea placeholder="Опишите неисправность"></textarea>
+                <button class="btn" type="submit">Отправить заявку</button>
+                <div class="form-status" id="repairStatus"></div>
+              </form>
             </div>
 
-            <div class="contact-panels">
-              <div class="contact-panel contact-panel--repair">
-                <form class="form" id="repairForm">
-                  <input type="text" placeholder="Ваше имя" />
-                  <input type="tel" placeholder="Телефон" />
-                  <input type="text" placeholder="Ваш адрес" />
-                  <input type="text" placeholder="Удобное время для приезда" />
-                  <select>
-                    <option>Выберите технику</option>
-                    <option>Стиральные машины</option>
-                    <option>Посудомоечные машины</option>
-                    <option>Холодильники</option>
-                    <option>Духовые шкафы</option>
-                    <option>Варочные панели</option>
-                    <option>Сушильные машины</option>
-                  </select>
-                  <textarea placeholder="Опишите неисправность"></textarea>
-                  <button class="btn" type="submit">Отправить заявку</button>
-                  <div class="form-status" id="repairStatus"></div>
-                </form>
-              </div>
+            <div class="form-panel" id="panel-util">
+              <form class="form" id="utilForm">
+                <input type="text" placeholder="Ваше имя" />
+                <input type="tel" placeholder="Телефон" />
+                <select>
+                  <option>Какая техника на утилизацию</option>
+                  <option>Стиральная машина</option>
+                  <option>Посудомоечная машина</option>
+                  <option>Холодильник</option>
+                  <option>Духовой шкаф</option>
+                  <option>Другая техника</option>
+                </select>
 
-              <div class="contact-panel contact-panel--util">
-                <form class="form" id="utilForm">
-                  <input type="text" placeholder="Ваше имя" />
-                  <input type="tel" placeholder="Телефон" />
-                  <select>
-                    <option>Какая техника на утилизацию</option>
-                    <option>Стиральная машина</option>
-                    <option>Посудомоечная машина</option>
-                    <option>Холодильник</option>
-                    <option>Духовой шкаф</option>
-                    <option>Другая техника</option>
-                  </select>
+                <div class="upload-box">
+                  <label class="upload-label" for="photoUpload">
+                    <div class="upload-icon">📷</div>
+                    <div class="upload-text">
+                      <strong>Добавьте фото техники</strong>
+                      <span>Можно приложить 1–3 фото для быстрой предварительной оценки</span>
+                    </div>
+                  </label>
+                  <input class="file-input-hidden" id="photoUpload" type="file" accept="image/*" />
+                  <div class="file-name" id="fileName">Файл пока не выбран</div>
+                </div>
 
-                  <div class="upload-box">
-                    <label class="upload-label" for="photoUpload">
-                      <div class="upload-icon">📷</div>
-                      <div class="upload-text">
-                        <strong>Добавьте фото техники</strong>
-                        <span>Можно приложить 1–3 фото для быстрой предварительной оценки</span>
-                      </div>
-                    </label>
-                    <input class="file-input-hidden" id="photoUpload" type="file" accept="image/*" />
-                    <div class="file-name" id="fileName">Файл пока не выбран</div>
-                  </div>
+                <textarea placeholder="Опишите состояние техники, адрес и удобное время"></textarea>
+                <button class="btn" type="submit">Отправить запрос</button>
+                <div class="form-status" id="utilStatus"></div>
+              </form>
+            </div>
 
-                  <textarea placeholder="Опишите состояние техники, адрес и удобное время"></textarea>
-                  <button class="btn" type="submit">Отправить запрос</button>
-                  <div class="form-status" id="utilStatus"></div>
-                </form>
-              </div>
+            <div class="form-panel" id="panel-review" style="display:none !important;">
+              <form class="form" id="reviewForm">
+                <input type="text" placeholder="Ваше имя" />
+                <input type="tel" placeholder="Телефон для обратной связи" />
+                <input type="text" placeholder="Район или улица" />
+                <select>
+                  <option>О какой технике отзыв</option>
+                  <option>Стиральные машины</option>
+                  <option>Посудомоечные машины</option>
+                  <option>Холодильники</option>
+                  <option>Духовые шкафы</option>
+                  <option>Варочные панели</option>
+                  <option>Другая техника</option>
+                </select>
+
+                <div class="upload-box">
+                  <label class="upload-label" for="reviewPhotoUpload">
+                    <div class="upload-icon">🖼</div>
+                    <div class="upload-text">
+                      <strong>Добавьте фото, если хотите</strong>
+                      <span>Можно приложить фото техники, результата ремонта или места установки</span>
+                    </div>
+                  </label>
+                  <input class="file-input-hidden" id="reviewPhotoUpload" type="file" accept="image/*" />
+                  <div class="file-name" id="reviewFileName">Файл пока не выбран</div>
+                </div>
+
+                <textarea placeholder="Напишите ваш отзыв"></textarea>
+                <button class="btn" type="submit">Отправить отзыв</button>
+                <div class="form-status" id="reviewStatus"></div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-
-    
     <script>
-      function tryBrandFile(img) {
-        const brand = img.dataset.brand || img.alt || '';
-        const variants = {
-          AEG: ['aeg.svg', 'AEG.svg', 'aeg.png', 'AEG.png'],
-          Bosch: ['bosch.svg', 'Bosch.svg', 'bosch.png', 'Bosch.png'],
-          Electrolux: ['electrolux.svg', 'Electrolux.svg', 'electrolux.png', 'Electrolux.png'],
-          LG: ['lg.svg', 'LG.svg', 'lg.png', 'LG.png'],
-          Miele: ['miele.svg', 'Miele.svg', 'miele.png', 'Miele.png'],
-          Neff: ['neff.svg', 'Neff.svg', 'neff.png', 'Neff.png'],
-          Samsung: ['samsung.svg', 'Samsung.svg', 'samsung.png', 'Samsung.png'],
-          Siemens: ['siemens.svg', 'Siemens.svg', 'siemens.png', 'Siemens.png'],
-          Smeg: ['smeg.svg', 'Smeg.svg', 'smeg.png', 'Smeg.png'],
-          Zanussi: ['zanussi.svg', 'Zanussi.svg', 'zanussi.png', 'Zanussi.png']
-        };
+  const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
 
-        const files = variants[brand] || [];
-        const nextIndex = Number(img.dataset.tryIndex || '0') + 1;
+  function tryBrandFile(img) {
+    const brand = img.dataset.brand || img.alt || '';
+    const variants = {
+      AEG: ['aeg.svg', 'AEG.svg', 'aeg.png', 'AEG.png'],
+      Bosch: ['bosch.svg', 'Bosch.svg', 'bosch.png', 'Bosch.png'],
+      Electrolux: ['electrolux.svg', 'Electrolux.svg', 'electrolux.png', 'Electrolux.png'],
+      LG: ['lg.svg', 'LG.svg', 'lg.png', 'LG.png'],
+      Miele: ['miele.svg', 'Miele.svg', 'miele.png', 'Miele.png'],
+      Neff: ['neff.svg', 'Neff.svg', 'neff.png', 'Neff.png'],
+      Samsung: ['samsung.svg', 'Samsung.svg', 'samsung.png', 'Samsung.png'],
+      Siemens: ['siemens.svg', 'Siemens.svg', 'siemens.png', 'Siemens.png'],
+      Smeg: ['smeg.svg', 'Smeg.svg', 'smeg.png', 'Smeg.png'],
+      Zanussi: ['zanussi.svg', 'Zanussi.svg', 'zanussi.png', 'Zanussi.png']
+    };
 
-        if (nextIndex < files.length) {
-          img.dataset.tryIndex = String(nextIndex);
-          img.src = files[nextIndex];
-          return;
+    const files = variants[brand] || [];
+    const nextIndex = Number(img.dataset.tryIndex || '0') + 1;
+
+    if (nextIndex < files.length) {
+      img.dataset.tryIndex = String(nextIndex);
+      img.src = files[nextIndex];
+      return;
+    }
+
+    img.style.display = 'none';
+    const card = img.closest('.brand-logo');
+    if (card) card.classList.add('show-fallback');
+  }
+
+  function showToast(message, isError) {
+    const toast = document.getElementById('globalToast');
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.remove('toast-error', 'toast-success', 'show');
+    toast.classList.add(isError ? 'toast-error' : 'toast-success');
+
+    requestAnimationFrame(() => {
+      toast.classList.add('show');
+    });
+
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
+
+  function setStatus(id, message, isError) {
+    const box = document.getElementById(id);
+    if (!box) return;
+    box.textContent = message;
+    box.classList.add('show');
+    box.style.borderColor = isError ? 'rgba(248,113,113,0.45)' : 'rgba(255,255,255,0.28)';
+    box.style.background = isError ? 'rgba(127,29,29,0.22)' : 'rgba(255,255,255,0.12)';
+    showToast(message, isError);
+  }
+
+  function clearStatus(id) {
+    const box = document.getElementById(id);
+    if (!box) return;
+    box.textContent = '';
+    box.classList.remove('show');
+  }
+
+  function bindFilePreview(inputId, outputId) {
+    const input = document.getElementById(inputId);
+    const output = document.getElementById(outputId);
+    if (!input || !output) return;
+
+    input.addEventListener('change', () => {
+      output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
+    });
+  }
+
+  function setActiveTab(tab) {
+    const repair = document.getElementById('tabRepair');
+    const util = document.getElementById('tabUtil');
+    if (tab === 'util' && util) util.checked = true;
+    if (tab === 'repair' && repair) repair.checked = true;
+  }
+
+  function collectFormText(form) {
+    const values = Array.from(form.querySelectorAll('input, select, textarea'))
+      .filter((el) => el.type !== 'file')
+      .map((el) => {
+        const label =
+          el.placeholder ||
+          (el.options && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') ||
+          el.name ||
+          'Поле';
+
+        const value = (el.value || '').trim();
+
+        if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) {
+          return null;
         }
 
-        img.style.display = 'none';
-        const card = img.closest('.brand-logo');
-        if (card) card.classList.add('show-fallback');
-      }
+        return label + ': ' + value;
+      })
+      .filter(Boolean);
 
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.brand-logo img').forEach((img) => {
-          img.dataset.tryIndex = '0';
+    return values.join('
+');
+  }
+
+  async function sendToWorker(options) {
+    const form = document.getElementById(options.formId);
+    if (!form) return;
+
+    clearStatus(options.statusId);
+
+    const message = collectFormText(form);
+    const fileInput = options.fileInputId ? document.getElementById(options.fileInputId) : null;
+    const hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
+
+    try {
+      let response;
+
+      if (hasFile) {
+        const payload = new FormData();
+        payload.append('title', options.title);
+        payload.append('message', message);
+        payload.append('photo', fileInput.files[0]);
+
+        response = await fetch(WORKER_URL, {
+          method: 'POST',
+          body: payload
         });
-      });
-
-      const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
-  
-function showToast(message, isError) {
-  const toast = document.getElementById('globalToast');
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.classList.remove('toast-error', 'toast-success', 'show');
-  toast.classList.add(isError ? 'toast-error' : 'toast-success');
-
-  requestAnimationFrame(() => {
-    toast.classList.add('show');
-  });
-
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3200);
-}
-
-      function setStatus(id, message, isError) {
-        const box = document.getElementById(id);
-        if (!box) return;
-        box.textContent = message;
-        box.classList.add('show');
-        box.style.borderColor = isError ? 'rgba(248,113,113,0.45)' : 'rgba(255,255,255,0.28)';
-        box.style.background = isError ? 'rgba(127,29,29,0.22)' : 'rgba(255,255,255,0.12)';
-        showToast(message, isError);
-      }
-
-      function clearStatus(id) {
-        const box = document.getElementById(id);
-        if (!box) return;
-        box.textContent = '';
-        box.classList.remove('show');
-      }
-
-      function bindFilePreview(inputId, outputId) {
-        const input = document.getElementById(inputId);
-        const output = document.getElementById(outputId);
-        if (!input || !output) return;
-        input.addEventListener('change', () => {
-          output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
-        });
-      }
-
-      bindFilePreview('photoUpload', 'fileName');
-
-      function setActiveTab(tab) {
-        const repair = document.getElementById('tabRepair');
-        const util = document.getElementById('tabUtil');
-        if (tab === 'util' && util) util.checked = true;
-        if (tab === 'repair' && repair) repair.checked = true;
-      }
-
-      function collectFormText(title, form) {
-        const values = Array.from(form.querySelectorAll('input, select, textarea'))
-          .filter((el) => el.type !== 'file')
-          .map((el) => {
-            const label = el.placeholder || el.options?.[el.selectedIndex]?.text || el.name || 'Поле';
-            const value = el.value?.trim();
-            if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) return null;
-            return label + ': ' + value;
+      } else {
+        response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: options.title,
+            message: message
           })
-          .filter(Boolean);
-
-        
-    return values.join('\\n');
-
-      async function sendToWorker(options) {
-        const title = options.title;
-        const formId = options.formId;
-        const statusId = options.statusId;
-        const fileInputId = options.fileInputId || null;
-
-        const form = document.getElementById(formId);
-        if (!form) return;
-        clearStatus(statusId);
-
-        const message = collectFormText(title, form);
-        const fileInput = fileInputId ? document.getElementById(fileInputId) : null;
-        const hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
-
-        try {
-          let response;
-
-          if (hasFile) {
-            const payload = new FormData();
-            payload.append('title', title);
-            payload.append('message', message);
-            payload.append('photo', fileInput.files[0]);
-
-            response = await fetch(WORKER_URL, {
-              method: 'POST',
-              body: payload
-            });
-          } else {
-            response = await fetch(WORKER_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                title: title,
-                message: message
-              })
-            });
-          }
-
-          let result = {};
-          try {
-            result = await response.json();
-          } catch (e) {
-            result = {};
-          }
-
-          if (!response.ok || result.ok !== true) {
-            throw new Error(result.error || 'worker_failed');
-          }
-
-          setStatus(statusId, 'Заявка отправлена.', false);
-          form.reset();
-          const utilName = document.getElementById('fileName');
-          if (utilName) utilName.textContent = 'Файл пока не выбран';
-        } catch (error) {
-          console.error('Form send error:', error);
-          setStatus(statusId, 'Не удалось отправить заявку.', true);
-        }
+        });
       }
 
-      function prefillRepairForm(equipment, issueText) {
+      let result = {};
+      try {
+        result = await response.json();
+      } catch (e) {
+        result = {};
+      }
+
+      if (!response.ok || result.ok !== true) {
+        throw new Error(result.error || 'worker_failed');
+      }
+
+      setStatus(options.statusId, 'Заявка отправлена.', false);
+      form.reset();
+
+      const fileName = document.getElementById('fileName');
+      if (fileName) fileName.textContent = 'Файл пока не выбран';
+    } catch (error) {
+      console.error('Form send error:', error);
+      setStatus(options.statusId, 'Не удалось отправить заявку.', true);
+    }
+  }
+
+  function prefillRepairForm(equipment, issueText) {
+    setActiveTab('repair');
+
+    const select = document.querySelector('#repairForm select');
+    const textarea = document.querySelector('#repairForm textarea');
+    const formBlock = document.getElementById('contacts');
+
+    if (select && equipment) {
+      const option = Array.from(select.options).find((opt) => opt.text.trim() === equipment.trim());
+      if (option) select.value = option.value;
+    }
+
+    if (textarea && issueText) {
+      textarea.value = issueText;
+    }
+
+    if (formBlock) {
+      formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.brand-logo img').forEach((img) => {
+      img.dataset.tryIndex = '0';
+    });
+
+    bindFilePreview('photoUpload', 'fileName');
+
+    document.querySelectorAll('.service-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        const card = item.closest('.card');
+        const equipment = card?.dataset.equipment || '';
+        const issue = item.querySelector('span')?.textContent?.trim() || '';
+        prefillRepairForm(equipment, issue);
+      });
+    });
+
+    document.querySelectorAll('.sale-price').forEach((price) => {
+      price.addEventListener('click', () => {
+        const saleTitle = price.dataset.saleTitle || 'Интересует техника';
+        prefillRepairForm('Стиральные машины', 'Интересует покупка: ' + saleTitle);
+      });
+    });
+
+    document.querySelectorAll('[data-open-tab="repair"]').forEach((link) => {
+      link.addEventListener('click', () => {
         setActiveTab('repair');
-        const select = document.querySelector('#repairForm select');
-        const textarea = document.querySelector('#repairForm textarea');
-        const formBlock = document.getElementById('contacts');
-
-        if (select && equipment) {
-          const option = Array.from(select.options).find((opt) => opt.text.trim() === equipment.trim());
-          if (option) select.value = option.value;
-        }
-
-        if (textarea && issueText) {
-          textarea.value = issueText;
-        }
-
-        if (formBlock) formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      document.querySelectorAll('.service-item').forEach((item) => {
-        item.addEventListener('click', () => {
-          const card = item.closest('.card');
-          const equipment = card?.dataset.equipment || '';
-          const issue = item.querySelector('span')?.textContent?.trim() || '';
-          prefillRepairForm(equipment, issue);
-        });
       });
+    });
 
-      document.querySelectorAll('.sale-price').forEach((price) => {
-        price.addEventListener('click', () => {
-          const saleTitle = price.dataset.saleTitle || 'Интересует техника';
-          prefillRepairForm('Стиральные машины', 'Интересует покупка: ' + saleTitle);
-        });
+    const floatingButton = document.querySelector('.floating-cta');
+    if (floatingButton) {
+      floatingButton.addEventListener('click', () => {
+        setActiveTab('repair');
       });
+    }
 
-      document.querySelectorAll('[data-open-tab="repair"]').forEach((link) => {
-        link.addEventListener('click', () => {
-          setActiveTab('repair');
+    const repairForm = document.getElementById('repairForm');
+    const utilForm = document.getElementById('utilForm');
+
+    if (repairForm) {
+      repairForm.onsubmit = async function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        await sendToWorker({
+          title: 'Заявка на ремонт',
+          formId: 'repairForm',
+          statusId: 'repairStatus'
         });
-      });
 
-      const floatingButton = document.querySelector('.floating-cta');
-      if (floatingButton) {
-        floatingButton.addEventListener('click', () => {
-          setActiveTab('repair');
+        return false;
+      };
+    }
+
+    if (utilForm) {
+      utilForm.onsubmit = async function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        await sendToWorker({
+          title: 'Заявка на утилизацию',
+          formId: 'utilForm',
+          statusId: 'utilStatus',
+          fileInputId: 'photoUpload'
         });
-      }
 
-      const repairForm = document.getElementById('repairForm');
-      const utilForm = document.getElementById('utilForm');
-
-      if (repairForm) {
-        repairForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToWorker({
-            title: 'Заявка на ремонт',
-            formId: 'repairForm',
-            statusId: 'repairStatus'
-          });
-        });
-      }
-
-      if (utilForm) {
-        utilForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          await sendToWorker({
-            title: 'Заявка на утилизацию',
-            formId: 'utilForm',
-            statusId: 'utilStatus',
-            fileInputId: 'photoUpload'
-          });
-        });
-      }
-    </script>
-
+        return false;
+      };
+    }
+  });
+</script>
   </main>
 
 
-  <a class="floating-cta" href="#contacts" data-open-tab="repair" aria-label="Оформить заявку">
+  <a class="floating-cta" href="#contacts" data-open-tab="repair"
+    onclick="document.getElementById('panel-repair').classList.add('active');document.getElementById('panel-util').classList.remove('active');document.querySelector('.tab-btn[data-tab=\'repair\']').classList.add('active');document.querySelector('.tab-btn[data-tab=\'util\']').classList.remove('active');"
+    aria-label="Оформить заявку">
     <span class="floating-cta-icon">✦</span>
     <span>Оформить заявку</span>
   </a>
-
-  <div class="toast-global" id="globalToast"></div>
 
   <footer class="footer">
     <div class="container footer-row">
