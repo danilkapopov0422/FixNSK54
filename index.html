@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ремонт бытовой техники</title>
+  <!-- build: fixnsk54-final-clean-2026-04-22 -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -1829,11 +1830,7 @@
             <strong>Рядом с метро Октябрьская</strong>
           </article>
         </div>
-
-        <div class="reviews-actions">
-          <a href="#contacts" class="btn btn-outline" data-open-tab="review">Оставить отзыв</a>
-        </div>
-      </div>
+</div>
     </section>
 
     <section class="section sale" id="sale">
@@ -2011,7 +2008,7 @@
 
             <div class="contact-panels">
               <div class="contact-panel contact-panel--repair">
-            <form class="form" id="repairForm" action="javascript:void(0);">
+                <form class="form" id="repairForm" action="javascript:void(0);" novalidate>
                   <input type="text" placeholder="Ваше имя" />
                   <input type="tel" placeholder="Телефон" />
                   <input type="text" placeholder="Ваш адрес" />
@@ -2032,7 +2029,7 @@
               </div>
 
               <div class="contact-panel contact-panel--util">
-                <form class="form" id="utilForm" action="javascript:void(0);">
+                <form class="form" id="utilForm" action="javascript:void(0);" novalidate>
                   <input type="text" placeholder="Ваше имя" />
                   <input type="tel" placeholder="Телефон" />
                   <select>
@@ -2066,264 +2063,264 @@
         </div>
       </div>
     </section>
-    
-    const repairForm = document.getElementById('repairForm');
-const utilForm = document.getElementById('utilForm');
 
-if (repairForm) {
-  repairForm.onsubmit = async function (event) {
-    event.preventDefault();
-    event.stopPropagation();
 
-    await sendToWorker({
-      title: 'Заявка на ремонт',
-      formId: 'repairForm',
-      statusId: 'repairStatus'
-    });
-
-    return false;
-  };
-}
-
-if (utilForm) {
-  utilForm.onsubmit = async function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    await sendToWorker({
-      title: 'Заявка на утилизацию',
-      formId: 'utilForm',
-      statusId: 'utilStatus',
-      fileInputId: 'photoUpload'
-    });
-
-    return false;
-  };
-}
-    
     <script>
-      function tryBrandFile(img) {
-        const brand = img.dataset.brand || img.alt || '';
-        const variants = {
-          AEG: ['aeg.svg', 'AEG.svg', 'aeg.png', 'AEG.png'],
-          Bosch: ['bosch.svg', 'Bosch.svg', 'bosch.png', 'Bosch.png'],
-          Electrolux: ['electrolux.svg', 'Electrolux.svg', 'electrolux.png', 'Electrolux.png'],
-          LG: ['lg.svg', 'LG.svg', 'lg.png', 'LG.png'],
-          Miele: ['miele.svg', 'Miele.svg', 'miele.png', 'Miele.png'],
-          Neff: ['neff.svg', 'Neff.svg', 'neff.png', 'Neff.png'],
-          Samsung: ['samsung.svg', 'Samsung.svg', 'samsung.png', 'Samsung.png'],
-          Siemens: ['siemens.svg', 'Siemens.svg', 'siemens.png', 'Siemens.png'],
-          Smeg: ['smeg.svg', 'Smeg.svg', 'smeg.png', 'Smeg.png'],
-          Zanussi: ['zanussi.svg', 'Zanussi.svg', 'zanussi.png', 'Zanussi.png']
-        };
+  const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
 
-        const files = variants[brand] || [];
-        const nextIndex = Number(img.dataset.tryIndex || '0') + 1;
+  function tryBrandFile(img) {
+    const brand = img.dataset.brand || img.alt || '';
+    const variants = {
+      AEG: ['aeg.svg', 'AEG.svg', 'aeg.png', 'AEG.png'],
+      Bosch: ['bosch.svg', 'Bosch.svg', 'bosch.png', 'Bosch.png'],
+      Electrolux: ['electrolux.svg', 'Electrolux.svg', 'electrolux.png', 'Electrolux.png'],
+      LG: ['lg.svg', 'LG.svg', 'lg.png', 'LG.png'],
+      Miele: ['miele.svg', 'Miele.svg', 'miele.png', 'Miele.png'],
+      Neff: ['neff.svg', 'Neff.svg', 'neff.png', 'Neff.png'],
+      Samsung: ['samsung.svg', 'Samsung.svg', 'samsung.png', 'Samsung.png'],
+      Siemens: ['siemens.svg', 'Siemens.svg', 'siemens.png', 'Siemens.png'],
+      Smeg: ['smeg.svg', 'Smeg.svg', 'smeg.png', 'Smeg.png'],
+      Zanussi: ['zanussi.svg', 'Zanussi.svg', 'zanussi.png', 'Zanussi.png']
+    };
 
-        if (nextIndex < files.length) {
-          img.dataset.tryIndex = String(nextIndex);
-          img.src = files[nextIndex];
-          return;
+    const files = variants[brand] || [];
+    const nextIndex = Number(img.dataset.tryIndex || '0') + 1;
+
+    if (nextIndex < files.length) {
+      img.dataset.tryIndex = String(nextIndex);
+      img.src = files[nextIndex];
+      return;
+    }
+
+    img.style.display = 'none';
+    const card = img.closest('.brand-logo');
+    if (card) card.classList.add('show-fallback');
+  }
+
+  function showToast(message, isError) {
+    const toast = document.getElementById('globalToast');
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.remove('toast-error', 'toast-success', 'show');
+    toast.classList.add(isError ? 'toast-error' : 'toast-success');
+
+    requestAnimationFrame(() => {
+      toast.classList.add('show');
+    });
+
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
+
+  function setStatus(id, message, isError) {
+    const box = document.getElementById(id);
+    if (!box) return;
+    box.textContent = message;
+    box.classList.add('show');
+    box.style.borderColor = isError ? 'rgba(248,113,113,0.45)' : 'rgba(255,255,255,0.28)';
+    box.style.background = isError ? 'rgba(127,29,29,0.22)' : 'rgba(255,255,255,0.12)';
+    showToast(message, isError);
+  }
+
+  function clearStatus(id) {
+    const box = document.getElementById(id);
+    if (!box) return;
+    box.textContent = '';
+    box.classList.remove('show');
+  }
+
+  function bindFilePreview(inputId, outputId) {
+    const input = document.getElementById(inputId);
+    const output = document.getElementById(outputId);
+    if (!input || !output) return;
+
+    input.addEventListener('change', () => {
+      output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
+    });
+  }
+
+  function setActiveTab(tab) {
+    const repair = document.getElementById('tabRepair');
+    const util = document.getElementById('tabUtil');
+    if (tab === 'util' && util) util.checked = true;
+    if (tab === 'repair' && repair) repair.checked = true;
+  }
+
+  function collectFormText(form) {
+    const values = Array.from(form.querySelectorAll('input, select, textarea'))
+      .filter((el) => el.type !== 'file')
+      .map((el) => {
+        const label =
+          el.placeholder ||
+          (el.options && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') ||
+          el.name ||
+          'Поле';
+
+        const value = (el.value || '').trim();
+
+        if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) {
+          return null;
         }
 
-        img.style.display = 'none';
-        const card = img.closest('.brand-logo');
-        if (card) card.classList.add('show-fallback');
-      }
+        return label + ': ' + value;
+      })
+      .filter(Boolean);
 
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.brand-logo img').forEach((img) => {
-          img.dataset.tryIndex = '0';
+    return values.join('
+');
+  }
+
+  async function sendToWorker(options) {
+    const form = document.getElementById(options.formId);
+    if (!form) return;
+
+    clearStatus(options.statusId);
+
+    const message = collectFormText(form);
+    const fileInput = options.fileInputId ? document.getElementById(options.fileInputId) : null;
+    const hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
+
+    try {
+      let response;
+
+      if (hasFile) {
+        const payload = new FormData();
+        payload.append('title', options.title);
+        payload.append('message', message);
+        payload.append('photo', fileInput.files[0]);
+
+        response = await fetch(WORKER_URL, {
+          method: 'POST',
+          body: payload
         });
-      });
-
-      const WORKER_URL = 'https://fixnsk54-tg.danilkapopov0422.workers.dev/';
-  
-function showToast(message, isError) {
-  const toast = document.getElementById('globalToast');
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.classList.remove('toast-error', 'toast-success', 'show');
-  toast.classList.add(isError ? 'toast-error' : 'toast-success');
-
-  requestAnimationFrame(() => {
-    toast.classList.add('show');
-  });
-
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3200);
-}
-
-      function setStatus(id, message, isError) {
-        const box = document.getElementById(id);
-        if (!box) return;
-        box.textContent = message;
-        box.classList.add('show');
-        box.style.borderColor = isError ? 'rgba(248,113,113,0.45)' : 'rgba(255,255,255,0.28)';
-        box.style.background = isError ? 'rgba(127,29,29,0.22)' : 'rgba(255,255,255,0.12)';
-        showToast(message, isError);
-      }
-
-      function clearStatus(id) {
-        const box = document.getElementById(id);
-        if (!box) return;
-        box.textContent = '';
-        box.classList.remove('show');
-      }
-
-      function bindFilePreview(inputId, outputId) {
-        const input = document.getElementById(inputId);
-        const output = document.getElementById(outputId);
-        if (!input || !output) return;
-
-        input.addEventListener('change', () => {
-          output.textContent = input.files.length ? input.files[0].name : 'Файл пока не выбран';
+      } else {
+        response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: options.title,
+            message: message
+          })
         });
       }
+
+      let result = {};
+      try {
+        result = await response.json();
+      } catch (e) {
+        result = {};
+      }
+
+      if (!response.ok || result.ok !== true) {
+        throw new Error(result.error || 'worker_failed');
+      }
+
+      setStatus(options.statusId, 'Заявка отправлена.', false);
+      form.reset();
+
+      const fileName = document.getElementById('fileName');
+      if (fileName) fileName.textContent = 'Файл пока не выбран';
+    } catch (error) {
+      console.error('Form send error:', error);
+      setStatus(options.statusId, 'Не удалось отправить заявку.', true);
+    }
+  }
+
+  function prefillRepairForm(equipment, issueText) {
+    setActiveTab('repair');
+
+    const select = document.querySelector('#repairForm select');
+    const textarea = document.querySelector('#repairForm textarea');
+    const formBlock = document.getElementById('contacts');
+
+    if (select && equipment) {
+      const option = Array.from(select.options).find((opt) => opt.text.trim() === equipment.trim());
+      if (option) select.value = option.value;
+    }
+
+    if (textarea && issueText) {
+      textarea.value = issueText;
+    }
+
+    if (formBlock) {
+      formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.brand-logo img').forEach((img) => {
+      img.dataset.tryIndex = '0';
+    });
 
     bindFilePreview('photoUpload', 'fileName');
 
-      function setActiveTab(tab) {
-        const repair = document.getElementById('tabRepair');
-        const util = document.getElementById('tabUtil');
-        if (tab === 'util' && util) util.checked = true;
-        if (tab === 'repair' && repair) repair.checked = true;
-      }
+    document.querySelectorAll('.service-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        const card = item.closest('.card');
+        const equipment = card?.dataset.equipment || '';
+        const issue = item.querySelector('span')?.textContent?.trim() || '';
+        prefillRepairForm(equipment, issue);
+      });
+    });
 
-      function collectFormText(title, form) {
-  const values = Array.from(form.querySelectorAll('input, select, textarea'))
-    .filter((el) => el.type !== 'file')
-    .map((el) => {
-      const label =
-        el.placeholder ||
-        (el.options && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') ||
-        el.name ||
-        'Поле';
+    document.querySelectorAll('.sale-price').forEach((price) => {
+      price.addEventListener('click', () => {
+        const saleTitle = price.dataset.saleTitle || 'Интересует техника';
+        prefillRepairForm('Стиральные машины', 'Интересует покупка: ' + saleTitle);
+      });
+    });
 
-      const value = (el.value || '').trim();
-
-      if (!value || value.startsWith('Выберите') || value.startsWith('Какая')) {
-        return null;
-      }
-
-      return label + ': ' + value;
-    })
-    .filter(Boolean);
-
-  return values.join('\n');
-}
-
-      async function sendToWorker(options) {
-        const title = options.title;
-        const formId = options.formId;
-        const statusId = options.statusId;
-        const fileInputId = options.fileInputId || null;
-
-        const form = document.getElementById(formId);
-        if (!form) return;
-        clearStatus(statusId);
-
-        const message = collectFormText(title, form);
-        const fileInput = fileInputId ? document.getElementById(fileInputId) : null;
-        const hasFile = !!(fileInput && fileInput.files && fileInput.files.length);
-
-        try {
-          let response;
-
-          if (hasFile) {
-            const payload = new FormData();
-            payload.append('title', title);
-            payload.append('message', message);
-            payload.append('photo', fileInput.files[0]);
-
-            response = await fetch(WORKER_URL, {
-              method: 'POST',
-              body: payload
-            });
-          } else {
-            response = await fetch(WORKER_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                title: title,
-                message: message
-              })
-            });
-          }
-
-          let result = {};
-          try {
-            result = await response.json();
-          } catch (e) {
-            result = {};
-          }
-
-          if (!response.ok || result.ok !== true) {
-            throw new Error(result.error || 'worker_failed');
-          }
-
-          setStatus(statusId, 'Заявка отправлена.', false);
-          form.reset();
-          const utilName = document.getElementById('fileName');
-          if (utilName) utilName.textContent = 'Файл пока не выбран';
-        } catch (error) {
-          console.error('Form send error:', error);
-          setStatus(statusId, 'Не удалось отправить заявку.', true);
-        }
-      }
-
-      function prefillRepairForm(equipment, issueText) {
+    document.querySelectorAll('[data-open-tab="repair"]').forEach((link) => {
+      link.addEventListener('click', () => {
         setActiveTab('repair');
-        const select = document.querySelector('#repairForm select');
-        const textarea = document.querySelector('#repairForm textarea');
-        const formBlock = document.getElementById('contacts');
-
-        if (select && equipment) {
-          const option = Array.from(select.options).find((opt) => opt.text.trim() === equipment.trim());
-          if (option) select.value = option.value;
-        }
-
-        if (textarea && issueText) {
-          textarea.value = issueText;
-        }
-
-        if (formBlock) formBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      document.querySelectorAll('.service-item').forEach((item) => {
-        item.addEventListener('click', () => {
-          const card = item.closest('.card');
-          const equipment = card?.dataset.equipment || '';
-          const issue = item.querySelector('span')?.textContent?.trim() || '';
-          prefillRepairForm(equipment, issue);
-        });
       });
+    });
 
-      document.querySelectorAll('.sale-price').forEach((price) => {
-        price.addEventListener('click', () => {
-          const saleTitle = price.dataset.saleTitle || 'Интересует техника';
-          prefillRepairForm('Стиральные машины', 'Интересует покупка: ' + saleTitle);
-        });
+    const floatingButton = document.querySelector('.floating-cta');
+    if (floatingButton) {
+      floatingButton.addEventListener('click', () => {
+        setActiveTab('repair');
       });
+    }
 
-      document.querySelectorAll('[data-open-tab="repair"]').forEach((link) => {
-        link.addEventListener('click', () => {
-          setActiveTab('repair');
+    const repairForm = document.getElementById('repairForm');
+    const utilForm = document.getElementById('utilForm');
+
+    if (repairForm) {
+      repairForm.onsubmit = async function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        await sendToWorker({
+          title: 'Заявка на ремонт',
+          formId: 'repairForm',
+          statusId: 'repairStatus'
         });
-      });
 
-      const floatingButton = document.querySelector('.floating-cta');
-      if (floatingButton) {
-        floatingButton.addEventListener('click', () => {
-          setActiveTab('repair');
+        return false;
+      };
+    }
+
+    if (utilForm) {
+      utilForm.onsubmit = async function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        await sendToWorker({
+          title: 'Заявка на утилизацию',
+          formId: 'utilForm',
+          statusId: 'utilStatus',
+          fileInputId: 'photoUpload'
         });
-      }
-      
-    </script>
 
+        return false;
+      };
+    }
+  });
+</script>
   </main>
 
 
@@ -2332,7 +2329,7 @@ function showToast(message, isError) {
     <span>Оформить заявку</span>
   </a>
 
-  <div class="toast-global" id="globalToast"></div>
+    <div class="toast-global" id="globalToast"></div>
 
   <footer class="footer">
     <div class="container footer-row">
